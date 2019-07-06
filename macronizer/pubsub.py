@@ -10,6 +10,7 @@ class PublisherMixin(Generic[T]):
   _subscribers: List[SubscriberMixin[T]]
 
   def __init__(self):
+    super(PublisherMixin, self).__init__()
     self._subscribers = []
 
   def add_subscriber(self, subscriber: SubscriberMixin[T]):
@@ -24,6 +25,7 @@ class SubscriberMixin(Generic[T]):
   queue: asyncio.Queue[T]
 
   def __init__(self):
+    super(SubscriberMixin, self).__init__()
     self.queue = asyncio.Queue()
 
   def enqueue(self, message: T):

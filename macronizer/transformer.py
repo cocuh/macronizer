@@ -39,8 +39,9 @@ class KeyboardState:
 
 
 class BaseTransformer(
-  abc.ABC,
-  PublisherMixin[InputEvent], SubscriberMixin[InputEvent]):
+  PublisherMixin[InputEvent], SubscriberMixin[InputEvent], abc.ABC):
+  def __init__(self):
+    super(BaseTransformer, self).__init__()
 
   @abc.abstractmethod
   async def run(self) -> None:
