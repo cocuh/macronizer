@@ -4,12 +4,13 @@ import os
 import select
 from ctypes import sizeof
 from pathlib import Path
-from typing import AsyncGenerator, List, Optional, Union
+from typing import List, Optional, Union
 
+from macronizer.pubsub import PublisherMixin
 from macronizer.structures import InputEvent, InputId
 
 
-class InputDevice:
+class InputDevice(PublisherMixin):
   fd: int
   info: InputId
   name: str
@@ -17,6 +18,7 @@ class InputDevice:
   _partial_read_data: bytes
 
   def __init__(self, path: Union[Path, str]):
+    super().__init__()
     self.fd = os.open(path, os.O_RDWR | os.O_NONBLOCK)
     self.info = self._get_device_info(self.fd)
     self.name = self._get_device_name(self.fd)
@@ -31,21 +33,20 @@ class InputDevice:
         return result
       result.append(data)
 
+  async def run_publisher(self) -> None:
+    r, _, _ = select.select([self.fd], [], [])
+    for event in self.read():
+      self.publish(event)
+
   def print_event(self):
     while True:
       r, _, _ = select.select([self.fd], [], [])
-      for eve in self.read():
-        print(eve)
+      for event in self.read():
+        print(event)
 
   def debug(self):
     with self.grab():
       self.print_event()
-
-  async def read_generator(self) -> AsyncGenerator[InputEvent, None]:
-    while True:
-      r, _, _ = select.select([self.fd], [], [])
-      for eve in self.read():
-        yield eve
 
   def _maybe_read_once(self) -> Optional[InputEvent]:
     bytes_to_read = sizeof(InputEvent) - len(self._partial_read_data)
