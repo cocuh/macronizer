@@ -13,13 +13,15 @@ from macronizer.consts.input_event_codes import (
   KeyEventValue,
   RelativeEventCode
 )
+from macronizer.pubsub import SubscriberMixin
 from macronizer.structures import EventType, InputEvent, InputId, UInputUserDev
 
 logger = logging.getLogger(__name__)
 
 
-class UInputDevice:
+class UInputDevice(SubscriberMixin):
   def __init__(self, path: Union[str, Path]):
+    super().__init__()
     self.fd = os.open(path, os.O_RDWR | os.O_NONBLOCK)
 
   def write(self, event: InputEvent):
@@ -28,6 +30,13 @@ class UInputDevice:
 
   def sync(self):
     os.write(self.fd, InputEvent.create(EventType.EV_SYN, 0, 0))
+
+  async def run_subscriber(self):
+    while True:
+      event = await self.queue.get()
+      self.write(event)
+      if self.queue.empty():
+        self.sync()
 
   @contextlib.contextmanager
   def open(self):
