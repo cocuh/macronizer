@@ -68,4 +68,6 @@ class Transformer(BaseTransformer):
 class NoOpTransformer(BaseTransformer):
   async def run(self) -> None:
     while True:
-      self.publish(await self.queue.get())
+      event = await self.queue.get()
+      logger.debug(f"loop: {event!r}")
+      self.publish(event)

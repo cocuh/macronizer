@@ -31,7 +31,7 @@ class UInputDevice(SubscriberMixin):
   def sync(self):
     os.write(self.fd, InputEvent.create(EventType.EV_SYN, 0, 0))
 
-  async def run_subscriber(self):
+  async def run(self):
     while True:
       event = await self.queue.get()
       self.write(event)
@@ -62,7 +62,7 @@ class UInputDevice(SubscriberMixin):
 
     device = cls(path=path)
     os.write(device.fd, bytes(settings))
-    cls._enable_event_support(device.fd, support_events)
+    cls._enable_event_support(device.fd, event_dict=support_events)
     return device
 
   @classmethod
@@ -84,7 +84,7 @@ class UInputDevice(SubscriberMixin):
 
     if event_dict is None:
       event_dict = {
-        EventType.EV_KEY: list(KeyEventCode),
+        EventType.EV_KEY: list(set(KeyEventCode)),
         EventType.EV_ABS: list(AbsoluteEventCode),
         EventType.EV_REL: list(RelativeEventCode),
       }
@@ -93,7 +93,10 @@ class UInputDevice(SubscriberMixin):
     for event_type, event_codes in event_dict.items():
       fcntl.ioctl(fd, UI_SET_EVBIT, event_type)
       for code in event_codes:
-        fcntl.ioctl(fd, UI_SET_EVBIT + event_type, code)
+        try:
+          fcntl.ioctl(fd, UI_SET_EVBIT + event_type, code)
+        except OSError as e:
+          logger.error(f'Invalid argument:\n  EventType: {event_type}\n  Code: {code}', exc_info=True)
 
 
 def __debug():
