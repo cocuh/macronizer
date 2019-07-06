@@ -8,6 +8,9 @@ from macronizer.consts.input_event_codes import EventCode, EventType, EventValue
 
 
 class TimeVal(ctypes.Structure):
+  sec: int
+  usec: int
+
   _fields_ = [
     ('sec', ctypes.c_ulong),
     ('usec', ctypes.c_ulong),
@@ -19,6 +22,11 @@ class TimeVal(ctypes.Structure):
 
 
 class InputEvent(ctypes.Structure):
+  time: TimeVal
+  type: int
+  code: int
+  value: int
+
   _fields_ = [
     ('time', TimeVal),
     ('type', ctypes.c_ushort),
@@ -29,10 +37,7 @@ class InputEvent(ctypes.Structure):
   @classmethod
   def create(cls, type: EventType, code: EventCode, value: EventValue, time: Optional[TimeVal] = None) -> InputEvent:
     if time is None:
-      timestamp: float = time_module.time()
-      timestamp_s: int = int(timestamp)
-      timestamp_us: int = int((timestamp - timestamp_s) * 1000000)
-      time = TimeVal.create(sec=timestamp_s, usec=timestamp_us)
+      time = TimeVal.now()
     return cls(time=time, type=type, code=code, value=value)
 
   def __repr__(self):
@@ -41,6 +46,10 @@ class InputEvent(ctypes.Structure):
 
 
 class InputId(ctypes.Structure):
+  bustype: int
+  vendor: int
+  product: int
+  version: int
   _fields_ = [
     ('bustype', ctypes.c_uint16),
     ('vendor', ctypes.c_uint16),
@@ -50,6 +59,9 @@ class InputId(ctypes.Structure):
 
 
 class UInputUserDev(ctypes.Structure):
+  name: bytes
+  id: InputId
+
   _fields_ = [
     ('name', ctypes.c_char * 80),
     ('id', InputId),
