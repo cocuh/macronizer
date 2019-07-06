@@ -6,8 +6,13 @@ import time
 from pathlib import Path
 from typing import Dict, List, Union
 
-from macronizer.consts.input_event_codes import AbsoluteEventCode, EventCode, KeyEventCode, KeyEventValue, \
+from macronizer.consts.input_event_codes import (
+  AbsoluteEventCode,
+  EventCode,
+  KeyEventCode,
+  KeyEventValue,
   RelativeEventCode
+)
 from macronizer.structures import EventType, InputEvent, InputId, UInputUserDev
 
 logger = logging.getLogger(__name__)
