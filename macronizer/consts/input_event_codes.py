@@ -299,7 +299,7 @@ class EventValue:
   pass
 
 
-class KeyValue(EventValue, IntEnum):
+class KeyEventValue(EventValue, IntEnum):
   """
   Used when the type is EventType.EV_KEY
   """
