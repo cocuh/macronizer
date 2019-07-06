@@ -20,6 +20,18 @@ class TimeVal(ctypes.Structure):
   def create(cls, sec: int, usec: int) -> TimeVal:
     return cls(sec, usec)
 
+  @classmethod
+  def now(cls):
+    timestamp: float = time_module.time()
+    timestamp_s: int = int(timestamp)
+    timestamp_us: int = int((timestamp - timestamp_s) * 10 ** 6)
+    return TimeVal.create(sec=timestamp_s, usec=timestamp_us)
+
+  def delta_usec_from(self, time_val: TimeVal):
+    delta_sec = self.sec - time_val.sec
+    delta_usec = self.usec - time_val.usec + delta_sec * 10 ** 6
+    return delta_usec
+
 
 class InputEvent(ctypes.Structure):
   time: TimeVal
