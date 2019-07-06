@@ -248,7 +248,6 @@ class KeyEventCode(EventCode, IntEnum):
   KEY_NUMERIC_POUND = 0x20b
 
   KEY_MAX = 0x2ff
-  KEY_CNT = (KEY_MAX + 1)
 
 
 class AbsoluteEventCode(EventCode, IntEnum):
