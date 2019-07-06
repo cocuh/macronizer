@@ -1,12 +1,13 @@
 import contextlib
 import fcntl
+import logging
 import os
 import time
 from pathlib import Path
 from typing import Dict, List, Union
-import logging
 
-from macronizer.consts.input_event_codes import AbsoluteEventCode, EventCode, KeyEventCode, KeyValue, RelativeEventCode
+from macronizer.consts.input_event_codes import AbsoluteEventCode, EventCode, KeyEventCode, KeyEventValue, \
+  RelativeEventCode
 from macronizer.structures import EventType, InputEvent, InputId, UInputUserDev
 
 logger = logging.getLogger(__name__)
@@ -96,8 +97,8 @@ def __debug():
   with device.open():
     time.sleep(1)
     for key_code in youjo_codes:
-      device.write(InputEvent.create(EventType.EV_KEY, key_code, KeyValue.KEYDOWN))
-      device.write(InputEvent.create(EventType.EV_KEY, key_code, KeyValue.KEYUP))
+      device.write(InputEvent.create(EventType.EV_KEY, key_code, KeyEventValue.KEYDOWN))
+      device.write(InputEvent.create(EventType.EV_KEY, key_code, KeyEventValue.KEYUP))
     device.sync()
 
 
