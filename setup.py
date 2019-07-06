@@ -8,5 +8,9 @@ setup(
   license='',
   author='koku',
   author_email='',
-  description=''
+  description='',
+  install_requires=[],
+  extras_require={
+    'test': ['pytest'],
+  },
 )
