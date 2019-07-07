@@ -4,7 +4,7 @@ import logging
 from macronizer.consts.input_event_codes import EventType, KeyEventCode
 from macronizer.device.input_device import InputDevice
 from macronizer.device.uinput_device import UInputDevice
-from macronizer.pipeline.basic_remapper import BasicRemapConfig, BasicRemapper
+from macronizer.pipeline.key_remapper import RemapConfig, Remapper
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -37,7 +37,7 @@ def get_factorio_remap_config():
 
     KeyEventCode.KEY_LEFTALT: KeyEventCode.KEY_LEFTSHIFT,
   }
-  return BasicRemapConfig(
+  return RemapConfig(
     modifiers=(),
     rules={
       k: {(): v}
@@ -50,7 +50,7 @@ def run():
   config = get_factorio_remap_config()
 
   input_device = InputDevice.create_by_id()
-  remapper = BasicRemapper(config)
+  remapper = Remapper(config)
   output_device = UInputDevice.create(support_events={
     EventType.EV_KEY: config.get_possible_output_keys()
   })

@@ -24,11 +24,17 @@ class EventType(IntEnum):
   EV_CNT = (EV_MAX + 1)
 
 
-class EventCode:
+class EventCode(IntEnum):
   pass
 
 
-class KeyEventCode(EventCode, IntEnum):
+class BaseKeyEventCode(EventCode):
+  """
+  Event code for EV_KEY
+  """
+
+
+class KeyEventCode(BaseKeyEventCode):
   """
   See linux/input-event-codes.h
   """
@@ -234,8 +240,8 @@ class KeyEventCode(EventCode, IntEnum):
   KEY_FN_S = 0x1e3
   KEY_FN_B = 0x1e4
 
-  KEY_NUMERIC_0 = 0x200 
-  KEY_NUMERIC_1 = 0x201 
+  KEY_NUMERIC_0 = 0x200
+  KEY_NUMERIC_1 = 0x201
   KEY_NUMERIC_2 = 0x202
   KEY_NUMERIC_3 = 0x203
   KEY_NUMERIC_4 = 0x204
