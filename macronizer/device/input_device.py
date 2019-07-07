@@ -99,7 +99,7 @@ class InputDevice:
     return name.decode('utf-8').rstrip('\0')
 
   @classmethod
-  def create_by_id(cls, id: str = 'usb-Razer_Razer_Nostromo-event-kbd'):
+  def create_by_id(cls, id: str):
     return cls(path=Path('/dev/input/by-id') / id)
 
   @contextlib.contextmanager

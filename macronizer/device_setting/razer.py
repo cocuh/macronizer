@@ -1,10 +1,12 @@
 from enum import IntEnum
+from typing import List, Type
 
 from macronizer.consts.input_event_codes import EventCode, KeyEventCode
 from macronizer.device.input_device import InputDevice
+from macronizer.device_setting.base import DeviceSetting
 
 
-class RazerNostromo:
+class RazerNostromo(DeviceSetting):
   class KeyCode(EventCode, IntEnum):
     KEY_01 = KeyEventCode.KEY_TAB
     KEY_02 = KeyEventCode.KEY_Q
@@ -32,5 +34,12 @@ class RazerNostromo:
     KEY_RIGHT = KeyEventCode.KEY_RIGHT
     KEY_LEFT = KeyEventCode.KEY_LEFT
 
-  def get_input_device(self) -> InputDevice:
-    InputDevice.create_by_id()
+  @classmethod
+  def get_key_code_type(self) -> Type[EventCode]:
+    return self.KeyCode
+
+  @classmethod
+  def get_input_devices(self) -> List[InputDevice]:
+    return [
+      InputDevice.create_by_id(id='usb-Razer_Razer_Nostromo-event-kbd')
+    ]
