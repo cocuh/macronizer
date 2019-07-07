@@ -1,8 +1,8 @@
 import abc
 import logging
 
-from macronizer.pubsub import PublisherMixin, SubscriberMixin
-from macronizer.structures import InputEvent
+from macronizer.device.structures import InputEvent
+from macronizer.pipeline.pubsub import PublisherMixin, SubscriberMixin
 
 logger = logging.getLogger(__name__)
 

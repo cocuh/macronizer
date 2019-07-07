@@ -1,10 +1,10 @@
 import asyncio
 import logging
 
-from macronizer.basic_remapper import BasicRemapConfig, BasicRemapper
 from macronizer.consts.input_event_codes import EventType, KeyEventCode
-from macronizer.input_device import InputDevice
-from macronizer.uinput_device import UInputDevice
+from macronizer.device.input_device import InputDevice
+from macronizer.device.uinput_device import UInputDevice
+from macronizer.pipeline.basic_remapper import BasicRemapConfig, BasicRemapper
 
 logging.basicConfig(level=logging.DEBUG)
 

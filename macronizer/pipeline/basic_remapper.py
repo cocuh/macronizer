@@ -3,8 +3,8 @@ import logging
 from typing import Dict, Optional, Set, Tuple
 
 from macronizer.consts.input_event_codes import EventType, KeyEventCode, KeyEventValue
-from macronizer.structures import InputEvent, TimeVal
-from macronizer.transformer import BaseTransformer
+from macronizer.device.structures import InputEvent, TimeVal
+from macronizer.pipeline.transformer import BaseTransformer
 
 logger = logging.getLogger(__name__)
 

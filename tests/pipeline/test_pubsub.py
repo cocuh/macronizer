@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from macronizer.pubsub import PublisherMixin, SubscriberMixin
+from macronizer.pipeline.pubsub import PublisherMixin, SubscriberMixin
 
 
 class TestPubSub(TestCase):

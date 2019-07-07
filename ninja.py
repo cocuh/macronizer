@@ -2,9 +2,9 @@ import asyncio
 import logging
 
 from macronizer.consts.input_event_codes import EventType, KeyEventCode
-from macronizer.input_device import InputDevice
-from macronizer.transformer import NoOpTransformer
-from macronizer.uinput_device import UInputDevice
+from macronizer.device.input_device import InputDevice
+from macronizer.device.uinput_device import UInputDevice
+from macronizer.pipeline.transformer import NoOpTransformer
 
 logging.basicConfig(level=logging.DEBUG)
 

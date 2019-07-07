@@ -4,19 +4,17 @@ import fcntl
 import logging
 import os
 import select
-import warnings
 from asyncio import AbstractEventLoop
 from ctypes import sizeof
 from pathlib import Path
 from typing import AsyncGenerator, List, Optional, Union
 
-from macronizer.pubsub import PublisherMixin
-from macronizer.structures import InputEvent, InputId
+from macronizer.device.structures import InputEvent, InputId
 
 logger = logging.getLogger(__name__)
 
 
-class InputDevice(PublisherMixin):
+class InputDevice:
   fd: int
   info: InputId
   name: str
@@ -52,14 +50,6 @@ class InputDevice(PublisherMixin):
     loop.add_reader(self.fd, future.set_result, None)
     future.add_done_callback(lambda _: loop.remove_reader(self.fd))
     await future
-
-  async def run(self, loop: AbstractEventLoop) -> None:
-    while True:
-      warnings.warn("InputDevice.run is obsoleted.")
-      await self._watch(loop)
-      for event in self.read():
-        logger.debug(f"{event!r}")
-        self.publish(event)
 
   def print_event(self):
     while True:
