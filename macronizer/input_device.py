@@ -4,10 +4,11 @@ import fcntl
 import logging
 import os
 import select
+import warnings
 from asyncio import AbstractEventLoop
 from ctypes import sizeof
 from pathlib import Path
-from typing import List, Optional, Union
+from typing import AsyncGenerator, List, Optional, Union
 
 from macronizer.pubsub import PublisherMixin
 from macronizer.structures import InputEvent, InputId
@@ -38,6 +39,14 @@ class InputDevice(PublisherMixin):
         return result
       result.append(data)
 
+  async def read_async(self, loop: AbstractEventLoop) \
+      -> AsyncGenerator[InputEvent, None, None]:
+    while True:
+      await self._watch(loop)
+      for event in self.read():
+        logger.debug(f"{event!r}")
+        yield event
+
   async def _watch(self, loop: AbstractEventLoop):
     future = asyncio.Future()
     loop.add_reader(self.fd, future.set_result, None)
@@ -46,6 +55,7 @@ class InputDevice(PublisherMixin):
 
   async def run(self, loop: AbstractEventLoop) -> None:
     while True:
+      warnings.warn("InputDevice.run is obsoleted.")
       await self._watch(loop)
       for event in self.read():
         logger.debug(f"{event!r}")
