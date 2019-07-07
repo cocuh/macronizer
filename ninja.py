@@ -4,7 +4,7 @@ import logging
 from macronizer.consts.input_event_codes import EventType, KeyEventCode
 from macronizer.device.input_device import InputDevice
 from macronizer.device.uinput_device import UInputDevice
-from macronizer.pipeline.transformer import NoOpTransformer
+from macronizer.pipeline.pipeline import NoOpTransformer
 
 logging.basicConfig(level=logging.DEBUG)
 

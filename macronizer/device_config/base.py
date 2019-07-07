@@ -5,13 +5,14 @@ from macronizer.consts.input_event_codes import EventCode
 from macronizer.device.input_device import InputDevice
 
 
-class DeviceSetting(abc.ABC):
-  @abc.abstractmethod
+class DeviceConfig(abc.ABC):
+
   @classmethod
+  @abc.abstractmethod
   def get_key_code_type(self) -> Type[EventCode]:
     pass
 
-  @abc.abstractmethod
   @classmethod
+  @abc.abstractmethod
   def get_input_devices(self) -> List[InputDevice]:
     pass

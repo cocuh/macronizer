@@ -3,10 +3,10 @@ from typing import List, Type
 
 from macronizer.consts.input_event_codes import EventCode, KeyEventCode
 from macronizer.device.input_device import InputDevice
-from macronizer.device_setting.base import DeviceSetting
+from macronizer.device_config.base import DeviceConfig
 
 
-class RazerNostromo(DeviceSetting):
+class RazerNostromo(DeviceConfig):
   class KeyCode(EventCode, IntEnum):
     KEY_01 = KeyEventCode.KEY_TAB
     KEY_02 = KeyEventCode.KEY_Q

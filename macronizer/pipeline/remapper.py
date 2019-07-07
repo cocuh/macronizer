@@ -1,10 +1,10 @@
 import dataclasses
 import logging
-from typing import Dict, Generic, Optional, Set, Tuple, Type, TypeVar
+from typing import Dict, Generic, Optional, Set, Tuple, Type, TypeVar, Union
 
 from macronizer.consts.input_event_codes import BaseKeyEventCode, EventType, KeyEventCode, KeyEventValue
 from macronizer.device.structures import InputEvent, TimeVal
-from macronizer.pipeline.transformer import BaseTransformer
+from macronizer.pipeline.pipeline import BaseTransformer
 
 logger = logging.getLogger(__name__)
 
@@ -53,22 +53,28 @@ class KeyboardState(Generic[KeyEventCodeType]):
 Modifiers = Tuple[KeyEventCode]
 
 Rule = Dict[
-  Modifiers,
-  KeyEventCode,
+  KeyEventCodeType,
+  Optional[Union[KeyEventCode, Tuple[KeyEventCode]]],
 ]
 
 
 @dataclasses.dataclass
 class RemapConfig(Generic[KeyEventCodeType]):
   modifiers: Tuple[KeyEventCodeType, ...]
-  rules: Dict[KeyEventCodeType, Rule]
+  rules: Dict[Modifiers, Rule]
 
-  def get_possible_output_keys(self):
-    return set(
-      code
-        for rule in self.rules.values()
-        for code in rule.values()
+  def get_possible_output_keys(self) -> Set[KeyEventCodeType]:
+    keys = set(
+      sum(
+        (
+          list(code) if isinstance(code, (tuple, list)) else [code]
+          for rule in self.rules.values()
+          for code in rule.values()
+        ),
+        [],
+      )
     )
+    return set(k for k in keys if k is not None)
 
 
 class Remapper(BaseTransformer, Generic[KeyEventCodeType]):
@@ -95,28 +101,19 @@ class Remapper(BaseTransformer, Generic[KeyEventCodeType]):
     """
     Call self.emit(event) to emit the event
     """
-    rule: Rule = self.mapping.rules.get(event.code)
+    rule: Rule = self.mapping.rules.get(tuple(m for m in self.mapping.modifiers if m in modifiers), None)
     if rule is None or len(rule) == 0:
       return
-
-    candidates = sorted(
-      [
-        (
-          len(modifiers - set(mod)),
-          (mod, remap)
+    codes = rule.get(event.code, None)
+    if not isinstance(codes, (list, tuple)):
+      codes = [codes]
+    for code in codes:
+      if code is None:
+        continue
+      self.emit(
+        InputEvent.create(
+          type=EventType.EV_KEY,
+          code=code,
+          value=KeyEventValue(event.value),
         )
-        for mod, remap in rule.items()
-        if set(mod) == modifiers or set(mod) in modifiers
-      ],
-      key=lambda t: t[0],
-    )
-    if len(candidates) == 0:
-      return
-    remap: KeyEventCodeType = candidates[0][1][1]
-    self.emit(
-      InputEvent.create(
-        type=EventType.EV_KEY,
-        code=remap,
-        value=KeyEventValue(event.value),
       )
-    )

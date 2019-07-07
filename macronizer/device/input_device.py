@@ -38,7 +38,7 @@ class InputDevice:
       result.append(data)
 
   async def read_async(self, loop: AbstractEventLoop) \
-      -> AsyncGenerator[InputEvent, None, None]:
+      -> AsyncGenerator[InputEvent, None]:
     while True:
       await self._watch(loop)
       for event in self.read():
