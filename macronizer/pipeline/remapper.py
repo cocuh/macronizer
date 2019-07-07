@@ -102,6 +102,7 @@ class Remapper(BaseTransformer, Generic[KeyEventCodeType]):
     Call self.emit(event) to emit the event
     """
     rule: Rule = self.mapping.rules.get(tuple(m for m in self.mapping.modifiers if m in modifiers), None)
+    logger.debug(f'{rule!r}\n{event}\n{modifiers}')
     if rule is None or len(rule) == 0:
       return
     codes = rule.get(event.code, None)

@@ -23,9 +23,9 @@ KEY_CTRL = KeyEventCode.KEY_LEFTCTRL
 rules = {
   (): {
     Code.KEY_01: KeyEventCode.KEY_Q,
-    Code.KEY_02: KeyEventCode.BTN_LEFT,
+    Code.KEY_02: KeyEventCode.BTN_RIGHT,
     Code.KEY_03: KeyEventCode.KEY_W,
-    Code.KEY_04: KeyEventCode.BTN_RIGHT,
+    Code.KEY_04: KeyEventCode.BTN_LEFT,
     Code.KEY_05: KeyEventCode.KEY_R,
 
     Code.KEY_06: KEY_CTRL,
@@ -42,7 +42,7 @@ rules = {
 
     Code.KEY_SMALL: KEY_SHIFT
   },
-  (Code.KEY_LEFT): {
+  (Code.KEY_LEFT,): {
     Code.KEY_01: KeyEventCode.KEY_1,
     Code.KEY_02: KeyEventCode.KEY_2,
     Code.KEY_03: KeyEventCode.KEY_3,
@@ -55,7 +55,7 @@ rules = {
     Code.KEY_09: KeyEventCode.KEY_9,
     Code.KEY_10: KeyEventCode.KEY_0,
   },
-  (Code.KEY_RIGHT): {
+  (Code.KEY_RIGHT,): {
     Code.KEY_01: (KEY_SHIFT, KeyEventCode.KEY_1),
     Code.KEY_02: (KEY_SHIFT, KeyEventCode.KEY_2),
     Code.KEY_03: (KEY_SHIFT, KeyEventCode.KEY_3),
