@@ -14,7 +14,6 @@ modifiers = [
   Code.KEY_LEFT,
   Code.KEY_RIGHT,
   Code.KEY_UP,
-  Code.KEY_DOWN,
 ]
 
 KEY_SHIFT = KeyEventCode.KEY_LEFTSHIFT
@@ -22,25 +21,25 @@ KEY_CTRL = KeyEventCode.KEY_LEFTCTRL
 
 rules = {
   (): {
-    Code.KEY_01: KeyEventCode.KEY_Q,
-    Code.KEY_02: KeyEventCode.BTN_RIGHT,
+    Code.KEY_01: KeyEventCode.KEY_ESC,
+    Code.KEY_02: KeyEventCode.KEY_Q,
     Code.KEY_03: KeyEventCode.KEY_W,
-    Code.KEY_04: KeyEventCode.BTN_LEFT,
-    Code.KEY_05: KeyEventCode.KEY_R,
+    Code.KEY_04: KeyEventCode.KEY_E,
+    Code.KEY_05: KeyEventCode.BTN_RIGHT,
 
-    Code.KEY_06: KEY_CTRL,
+    Code.KEY_06: KEY_SHIFT,
     Code.KEY_07: KeyEventCode.KEY_A,
     Code.KEY_08: KeyEventCode.KEY_S,
     Code.KEY_09: KeyEventCode.KEY_D,
-    Code.KEY_10: KeyEventCode.KEY_F,
+    Code.KEY_10: KeyEventCode.KEY_R,
 
-    Code.KEY_11: KeyEventCode.KEY_ESC,
+    Code.KEY_11: KeyEventCode.KEY_SPACE,
     Code.KEY_12: KeyEventCode.KEY_T,
-    Code.KEY_13: None,
-    Code.KEY_14: KeyEventCode.KEY_E,
+    Code.KEY_13: KeyEventCode.KEY_F,
+    Code.KEY_14: KeyEventCode.KEY_M,
     Code.KEY_15: KeyEventCode.KEY_SPACE,
 
-    Code.KEY_SMALL: KEY_SHIFT
+    Code.KEY_SMALL: KEY_CTRL
   },
   (Code.KEY_LEFT,): {
     Code.KEY_01: KeyEventCode.KEY_1,
