@@ -1,7 +1,7 @@
 Macronizer
 ==========
 
-- Keyboard/mouse layout remapper / macro program for linux.
+- Keyboard layout remapper for linux.
     - input_event, uinput
 - Python 3.7 + asyncio
     - Based on asynchronous pub/sub framework
