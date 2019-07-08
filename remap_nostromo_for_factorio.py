@@ -55,17 +55,17 @@ rules = {
     Code.KEY_10: KeyEventCode.KEY_0,
   },
   (Code.KEY_RIGHT,): {
-    Code.KEY_01: (KEY_SHIFT, KeyEventCode.KEY_1),
-    Code.KEY_02: (KEY_SHIFT, KeyEventCode.KEY_2),
-    Code.KEY_03: (KEY_SHIFT, KeyEventCode.KEY_3),
-    Code.KEY_04: (KEY_SHIFT, KeyEventCode.KEY_4),
-    Code.KEY_05: (KEY_SHIFT, KeyEventCode.KEY_5),
+    Code.KEY_01: (KEY_SHIFT, KeyEventCode.KEY_NUMERIC_1),
+    Code.KEY_02: (KEY_SHIFT, KeyEventCode.KEY_NUMERIC_2),
+    Code.KEY_03: (KEY_SHIFT, KeyEventCode.KEY_NUMERIC_3),
+    Code.KEY_04: (KEY_SHIFT, KeyEventCode.KEY_NUMERIC_4),
+    Code.KEY_05: (KEY_SHIFT, KeyEventCode.KEY_NUMERIC_5),
 
-    Code.KEY_06: (KEY_SHIFT, KeyEventCode.KEY_6),
-    Code.KEY_07: (KEY_SHIFT, KeyEventCode.KEY_7),
-    Code.KEY_08: (KEY_SHIFT, KeyEventCode.KEY_8),
-    Code.KEY_09: (KEY_SHIFT, KeyEventCode.KEY_9),
-    Code.KEY_10: (KEY_SHIFT, KeyEventCode.KEY_0),
+    Code.KEY_06: (KEY_SHIFT, KeyEventCode.KEY_NUMERIC_6),
+    Code.KEY_07: (KEY_SHIFT, KeyEventCode.KEY_NUMERIC_7),
+    Code.KEY_08: (KEY_SHIFT, KeyEventCode.KEY_NUMERIC_8),
+    Code.KEY_09: (KEY_SHIFT, KeyEventCode.KEY_NUMERIC_9),
+    Code.KEY_10: (KEY_SHIFT, KeyEventCode.KEY_NUMERIC_0),
   },
 }
 
