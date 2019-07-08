@@ -1,20 +1,19 @@
 Macronizer
 ==========
 
-- Keyboard/mouse layout remapper / macro program.
+- Keyboard/mouse layout remapper / macro program for linux.
     - input_event, uinput
 - Python 3.7 + asyncio
-    - Pub/sub architecture,
+    - Based on asynchronous pub/sub framework
     - (Probably) extensible
-
 
 Feature
 -------
 - [x] uinput wrapper
-- [x] asyncio pubsub architecture
+- [x] asyncio pubsub framework
 - [x] Remap keyboard event to mouse click event
     - [x] Razer Nostromo remapper for factorio
-- [ ] Create remap pipeline creator from setting file
+- [ ] Remap pipeline creator from setting file
 
 Example
 -------
