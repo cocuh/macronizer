@@ -13,7 +13,7 @@ Feature
 - [x] asyncio pubsub framework
 - [x] Remap keyboard event to mouse click event
     - [x] Razer Nostromo remapper for factorio
-- [ ] Remap pipeline creator from setting file
+- [ ] Pipeline creator from setting file
 
 Example
 -------
