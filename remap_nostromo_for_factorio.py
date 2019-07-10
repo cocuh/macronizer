@@ -25,13 +25,13 @@ rules = {
     Code.KEY_02: KeyEventCode.KEY_Q,
     Code.KEY_03: KeyEventCode.KEY_W,
     Code.KEY_04: KeyEventCode.KEY_E,
-    Code.KEY_05: KeyEventCode.BTN_RIGHT,
+    Code.KEY_05: KeyEventCode.KEY_R,
 
     Code.KEY_06: KEY_SHIFT,
     Code.KEY_07: KeyEventCode.KEY_A,
     Code.KEY_08: KeyEventCode.KEY_S,
     Code.KEY_09: KeyEventCode.KEY_D,
-    Code.KEY_10: KeyEventCode.KEY_R,
+    Code.KEY_10: KeyEventCode.BTN_RIGHT,
 
     Code.KEY_11: KeyEventCode.KEY_SPACE,
     Code.KEY_12: KeyEventCode.KEY_T,
@@ -55,17 +55,17 @@ rules = {
     Code.KEY_10: KeyEventCode.KEY_0,
   },
   (Code.KEY_RIGHT,): {
-    Code.KEY_01: (KEY_SHIFT, KeyEventCode.KEY_NUMERIC_1),
-    Code.KEY_02: (KEY_SHIFT, KeyEventCode.KEY_NUMERIC_2),
-    Code.KEY_03: (KEY_SHIFT, KeyEventCode.KEY_NUMERIC_3),
-    Code.KEY_04: (KEY_SHIFT, KeyEventCode.KEY_NUMERIC_4),
-    Code.KEY_05: (KEY_SHIFT, KeyEventCode.KEY_NUMERIC_5),
+    Code.KEY_01: KeyEventCode.KEY_KP1,
+    Code.KEY_02: KeyEventCode.KEY_KP2,
+    Code.KEY_03: KeyEventCode.KEY_KP3,
+    Code.KEY_04: KeyEventCode.KEY_KP4,
+    Code.KEY_05: KeyEventCode.KEY_KP5,
 
-    Code.KEY_06: (KEY_SHIFT, KeyEventCode.KEY_NUMERIC_6),
-    Code.KEY_07: (KEY_SHIFT, KeyEventCode.KEY_NUMERIC_7),
-    Code.KEY_08: (KEY_SHIFT, KeyEventCode.KEY_NUMERIC_8),
-    Code.KEY_09: (KEY_SHIFT, KeyEventCode.KEY_NUMERIC_9),
-    Code.KEY_10: (KEY_SHIFT, KeyEventCode.KEY_NUMERIC_0),
+    Code.KEY_06: KeyEventCode.KEY_KP6,
+    Code.KEY_07: KeyEventCode.KEY_KP7,
+    Code.KEY_08: KeyEventCode.KEY_KP8,
+    Code.KEY_09: KeyEventCode.KEY_KP9,
+    Code.KEY_10: KeyEventCode.KEY_KP0,
   },
 }
 
