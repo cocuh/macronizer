@@ -152,6 +152,7 @@ class KeyEventCode(BaseKeyEventCode):
   KEY_DELETE = 111
   KEY_MACRO = 112
   KEY_MUTE = 113
+  KEY_PAUSE = 119
 
   BTN_MISC = 0x100
   BTN_0 = 0x100
