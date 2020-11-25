@@ -24,7 +24,7 @@ class EventType(IntEnum):
   EV_CNT = (EV_MAX + 1)
 
 
-class EventCode(IntEnum):
+class EventCode:
   pass
 
 
@@ -34,7 +34,7 @@ class BaseKeyEventCode(EventCode):
   """
 
 
-class KeyEventCode(BaseKeyEventCode):
+class KeyEventCode(BaseKeyEventCode, IntEnum):
   """
   See linux/input-event-codes.h
   """
